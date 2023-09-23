@@ -1,0 +1,472 @@
+{
+  'collection': {
+    'version': '3.867.0',
+    'href': 'https://api.teamsnap.com/v3/users',
+    'rel': 'users',
+    'template': {
+      'data': [
+        {
+          'name': 'first_name',
+          'value': None
+        },
+        {
+          'name': 'last_name',
+          'value': None
+        },
+        {
+          'name': 'password',
+          'value': None
+        },
+        {
+          'name': 'birthday',
+          'value': None
+        },
+        {
+          'name': 'email',
+          'value': None
+        },
+        {
+          'name': 'facebook_id',
+          'value': None,
+          'deprecated': True,
+          'prompt': 'facebook_id is deprecated and has been removed.  Continued use of facebook_id is not recommended it will no longer be stored.'
+        },
+        {
+          'name': 'facebook_access_token',
+          'value': None,
+          'deprecated': True,
+          'prompt': 'facebook_access_token is deprecated and has been removed.  Continued use of facebook_access_token is not recommended it will no longer be stored.'
+        },
+        {
+          'name': 'type',
+          'value': 'user'
+        },
+        {
+          'name': 'is_lab_rat',
+          'value': None
+        },
+        {
+          'name': 'receives_newsletter',
+          'value': None
+        }
+      ]
+    },
+    'links': [
+      {
+        'rel': 'advertisements',
+        'href': 'https://api.teamsnap.com/v3/advertisements'
+      },
+      {
+        'rel': 'members',
+        'href': 'https://api.teamsnap.com/v3/members'
+      },
+      {
+        'rel': 'division_members',
+        'href': 'https://api.teamsnap.com/v3/division_members'
+      },
+      {
+        'rel': 'events',
+        'href': 'https://api.teamsnap.com/v3/events'
+      },
+      {
+        'rel': 'invoices_aggregates',
+        'href': 'https://api.teamsnap.com/v3/invoices_aggregates'
+      },
+      {
+        'rel': 'message_data',
+        'href': 'https://api.teamsnap.com/v3/message_data'
+      },
+      {
+        'rel': 'messages',
+        'href': 'https://api.teamsnap.com/v3/messages'
+      },
+      {
+        'rel': 'teams',
+        'href': 'https://api.teamsnap.com/v3/teams'
+      },
+      {
+        'rel': 'teams_preferences',
+        'href': 'https://api.teamsnap.com/v3/teams_preferences'
+      },
+      {
+        'rel': 'root',
+        'href': 'https://api.teamsnap.com/v3/'
+      },
+      {
+        'rel': 'self',
+        'href': 'https://api.teamsnap.com/v3/me'
+      }
+    ],
+    'queries': [
+      {
+        'rel': 'search',
+        'href': 'https://api.teamsnap.com/v3/users/search',
+        'data': [
+          {
+            'name': 'id',
+            'value': None
+          },
+          {
+            'name': 'email',
+            'value': None
+          },
+          {
+            'name': 'page_size',
+            'value': None,
+            'prompt': 'The number of items to return for each page. Sending this parameter with the query will enable paging for the returned collection.'
+          },
+          {
+            'name': 'page_number',
+            'value': None,
+            'prompt': 'The number of the page to be returned. This requires that paging be turned on by also providing the page_size parameter.'
+          }
+        ]
+      }
+    ],
+    'commands': [
+      {
+        'rel': 'send_email_validation',
+        'href': 'https://api.teamsnap.com/v3/users/send_email_validation',
+        'prompt': 'Send a validation email to the user so they can validate their account.',
+        'data': []
+      },
+      {
+        'rel': 'send_trial_expiring_reminder',
+        'href': 'https://api.teamsnap.com/v3/users/send_trial_expiring_reminder',
+        'prompt': 'Send a reminder email to the user so they can upgrade their plan.',
+        'data': []
+      },
+      {
+        'rel': 'send_fomo_email',
+        'href': 'https://api.teamsnap.com/v3/users/send_fomo_email',
+        'prompt': 'Send an email to users who are not on the correct app version for direct/group messages so they can upgrade their app to the latest version.',
+        'data': [
+          {
+            'name': 'sender_user_id',
+            'value': None
+          },
+          {
+            'name': 'recipient_user_ids',
+            'value': None
+          },
+          {
+            'name': 'team_id',
+            'value': None
+          },
+          {
+            'name': 'message',
+            'value': None
+          }
+        ]
+      }
+    ],
+    'items': [
+      {
+        'href': 'https://api.teamsnap.com/v3/users/28819952',
+        'links': [
+          {
+            'rel': 'active_divisions',
+            'href': 'https://api.teamsnap.com/v3/divisions/active?user_id=28819952'
+          },
+          {
+            'rel': 'active_teams',
+            'href': 'https://api.teamsnap.com/v3/teams/active?user_id=28819952'
+          },
+          {
+            'rel': 'advertisements',
+            'href': 'https://api.teamsnap.com/v3/advertisements/search?user_id=28819952'
+          },
+          {
+            'rel': 'apn_devices',
+            'href': 'https://api.teamsnap.com/v3/apn_devices/search?user_id=28819952'
+          },
+          {
+            'rel': 'contacts',
+            'href': 'https://api.teamsnap.com/v3/contacts/search?user_id=28819952'
+          },
+          {
+            'rel': 'divisions',
+            'href': 'https://api.teamsnap.com/v3/divisions/search?user_id=28819952'
+          },
+          {
+            'rel': 'division_members',
+            'href': 'https://api.teamsnap.com/v3/division_members/search?user_id=28819952'
+          },
+          {
+            'rel': 'events',
+            'href': 'https://api.teamsnap.com/v3/events/search?user_id=28819952'
+          },
+          {
+            'rel': 'facebook_pages',
+            'href': 'https://api.teamsnap.com/v3/facebook_pages/search',
+            'prompt': '%{old} is deprecated and will be removed in a future version, use %{new} instead.'
+          },
+          {
+            'rel': 'gcm_devices',
+            'href': 'https://api.teamsnap.com/v3/gcm_devices/search?user_id=28819952'
+          },
+          {
+            'rel': 'invoices_aggregates',
+            'href': 'https://api.teamsnap.com/v3/invoices_aggregates/search?user_id=28819952'
+          },
+          {
+            'rel': 'next_payable_invoice',
+            'href': 'https://api.teamsnap.com/v3/invoices/search?page_size=1&sort_due_at=asc&status=open&user_id=28819952'
+          },
+          {
+            'rel': 'payable_invoices',
+            'href': 'https://api.teamsnap.com/v3/invoices/search?sort_due_at=asc&status=open&user_id=28819952'
+          },
+          {
+            'rel': 'members',
+            'href': 'https://api.teamsnap.com/v3/members/search?user_id=28819952'
+          },
+          {
+            'rel': 'message_data',
+            'href': 'https://api.teamsnap.com/v3/message_data/search?user_id=28819952'
+          },
+          {
+            'rel': 'messages',
+            'href': 'https://api.teamsnap.com/v3/messages/search?user_id=28819952'
+          },
+          {
+            'rel': 'personas',
+            'href': 'https://api.teamsnap.com/v3/members/personas?user_id=28819952'
+          },
+          {
+            'rel': 'teams',
+            'href': 'https://api.teamsnap.com/v3/teams/search?user_id=28819952'
+          },
+          {
+            'rel': 'teams_preferences',
+            'href': 'https://api.teamsnap.com/v3/teams_preferences/search?user_id=28819952'
+          },
+          {
+            'rel': 'tsl_metadatum',
+            'href': 'https://api.teamsnap.com/v3/tsl_metadata/search?user_id=28819952'
+          }
+        ],
+        'data': [
+          {
+            'name': 'id',
+            'value': 28819952,
+            'type': 'String'
+          },
+          {
+            'name': 'type',
+            'value': 'user',
+            'type': 'String'
+          },
+          {
+            'name': 'address_country',
+            'value': None,
+            'type': 'String',
+            'deprecated': True,
+            'prompt': 'address_country is deprecated and has been removed.  Continued use of address_country is not recommended it will no longer be stored.'
+          },
+          {
+            'name': 'address_state',
+            'value': None,
+            'type': 'String',
+            'deprecated': True,
+            'prompt': 'address_state is deprecated and has been removed.  Continued use of address_state is not recommended it will no longer be stored.'
+          },
+          {
+            'name': 'birthday',
+            'value': None,
+            'type': 'String'
+          },
+          {
+            'name': 'email',
+            'value': 'volunteers@competitionedelweiss.com',
+            'type': 'String'
+          },
+          {
+            'name': 'facebook_access_token',
+            'value': None,
+            'type': 'String',
+            'deprecated': True,
+            'prompt': 'facebook_access_token is deprecated and has been removed.  Continued use of facebook_access_token is not recommended it will no longer be stored.'
+          },
+          {
+            'name': 'facebook_id',
+            'value': None,
+            'type': 'String',
+            'deprecated': True,
+            'prompt': 'facebook_id is deprecated and has been removed.  Continued use of facebook_id is not recommended it will no longer be stored.'
+          },
+          {
+            'name': 'first_name',
+            'value': 'volunteer',
+            'type': 'String'
+          },
+          {
+            'name': 'is_eligible_for_free_trial',
+            'value': False,
+            'type': 'Boolean'
+          },
+          {
+            'name': 'last_name',
+            'value': 'coordinator',
+            'type': 'String'
+          },
+          {
+            'name': 'receives_newsletter',
+            'value': True,
+            'type': 'Boolean'
+          },
+          {
+            'name': 'teams_count',
+            'value': 23,
+            'type': 'Integer'
+          },
+          {
+            'name': 'active_teams_count',
+            'value': 1,
+            'type': 'Integer'
+          },
+          {
+            'name': 'managed_divisions_count',
+            'value': 1,
+            'type': 'Integer'
+          },
+          {
+            'name': 'highest_role',
+            'value': 'commissioner',
+            'type': 'String'
+          },
+          {
+            'name': 'managed_team_ids',
+            'value': [
+              8780519,
+              7049581,
+              7049582,
+              7049583,
+              7049584,
+              7204439,
+              7204440,
+              7204441,
+              7204442,
+              7526885,
+              7526890,
+              7526891,
+              7526892,
+              7526893,
+              7526899,
+              7526902,
+              8194038,
+              8194039,
+              8721786,
+              8721838,
+              8721839,
+              8721840,
+              8721841
+            ],
+            'type': 'Array[String]'
+          },
+          {
+            'name': 'owned_division_ids',
+            'value': [],
+            'type': 'Array[String]'
+          },
+          {
+            'name': 'owned_team_ids',
+            'value': [
+              8780519,
+              7049581,
+              7049582,
+              7049583,
+              7049584,
+              7204439,
+              7204440,
+              7204441,
+              7204442,
+              7526885,
+              7526890,
+              7526891,
+              7526892,
+              7526893,
+              7526899,
+              7526902,
+              8194038,
+              8194039,
+              8721786,
+              8721838,
+              8721839,
+              8721840,
+              8721841
+            ],
+            'type': 'Array[String]'
+          },
+          {
+            'name': 'managed_division_ids',
+            'value': [
+              519477
+            ],
+            'type': 'Array[String]'
+          },
+          {
+            'name': 'commissioned_team_ids',
+            'value': [
+              7049581,
+              7049582,
+              7049583,
+              7049584,
+              7204439,
+              7204440,
+              7204441,
+              7204442,
+              7526885,
+              7526890,
+              7526891,
+              7526892,
+              7526893,
+              7526899,
+              7526902,
+              8194038,
+              8194039,
+              8721786,
+              8721838,
+              8721839,
+              8721840,
+              8721841,
+              8780519
+            ],
+            'type': 'Array[String]'
+          },
+          {
+            'name': 'can_send_messages',
+            'value': True,
+            'type': 'Boolean'
+          },
+          {
+            'name': 'person_uuid',
+            'value': 'person-240359e2-524b-43ad-a187-5d248a6be455',
+            'type': 'String'
+          },
+          {
+            'name': 'is_lab_rat',
+            'value': False,
+            'type': 'Boolean'
+          },
+          {
+            'name': 'is_admin',
+            'value': False,
+            'type': 'Boolean'
+          },
+          {
+            'name': 'created_at',
+            'value': '2021-10-16T20:37:58Z',
+            'type': 'DateTime'
+          },
+          {
+            'name': 'updated_at',
+            'value': '2023-09-07T23:38:51Z',
+            'type': 'DateTime'
+          }
+        ],
+        'rel': 'user-28819952'
+      }
+    ]
+  }
+}
