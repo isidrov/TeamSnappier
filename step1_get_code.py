@@ -33,6 +33,6 @@ print_url()
 
 ### Authenticate if you haven't done so
 
-### Copy the the Authorization Code and copy it inside Step2_get_token.py, then run Step2...script.
+### Copy the the Authorization Code and copy it inside config.ini
 
 

@@ -39,6 +39,20 @@ def find_me():
         print(f"Request failed with status code: {response.status_code}")
         print(response.text)
 
+def write_to_json_file(data, filename="output.json"):
+    """
+    Write a Python dictionary to a JSON file.
+
+    Parameters:
+    - data (dict): The dictionary to write to the file.
+    - filename (str): The name of the file to which the data should be written. Defaults to "output.json".
+
+    Returns:
+    None
+    """
+    with open(filename, 'w') as file:
+        json.dump(data, file, indent=4)
+
 def get_url(url):
 
     API_HREF = url
@@ -51,7 +65,7 @@ def get_url(url):
 
         parsed_json = response.json()
 
-        print(json.dumps(parsed_json, indent=4))
+        return parsed_json
 
     else:
         print(f"Request failed with status code: {response.status_code}")
@@ -135,19 +149,29 @@ def create_team_member(member):
 def list_events(userid):
 
     params = {
-        'id': userid
+        'user_id': userid
     }
 
-    API_HREF = f"https://apiv3.teamsnap.com/users/search"  # Replace with your endpoint URL
+    API_HREF = f"https://api.teamsnap.com/v3/events/search"  # Replace with your endpoint URL
 
     response = requests.get(API_HREF, headers=headers, params=params)
 
     if response.status_code == 200:
 
-        print("Request was successful!")
+        print("list_events() was successful!")
         parsed_json = response.json()
 
-        print(f"My ID is {parsed_json['collection']['items'][0]['data'][00]['value']}")
+        myList = []
+
+        for item in parsed_json["collection"]["items"]:
+            data = item["data"]
+            team = {}
+            for subitem in data:
+                team[subitem["name"]] = subitem["value"]
+
+            myList.append(team)
+
+        return myList
 
     else:
         print(f"Request failed with status code: {response.status_code}")
@@ -167,40 +191,65 @@ def list_members(team_id):
 
         print("list_members() was successful!")
         parsed_json = response.json()
+        print("n")
+
+        myList = []
+        
+        for item in parsed_json["collection"]["items"]:
+            data = item["data"]
+            team = {}
+            for subitem in data:
+                team[subitem["name"]] = subitem["value"]
+
+            myList.append(team)
+
+        return myList
 
     else:
         print(f"Request failed with status code: {response.status_code}")
         print(response.text)
 
+def print_members(memberList):
+
+    for member in memberList:
+        print(f"First Name: {member['first_name']}")
+        print(f"Last Name: {member['last_name']}")
+        print(f"Email address: {member['email_addresses']}\n")
+
 def main():
 
     userid = find_me()
+    events_list = list_events(userid)
+    write_to_json_file(events_list,filename='events_list.json')
 
+    '''
+    events = get_url('https://api.teamsnap.com/v3/events')
+    write_to_json_file(events, filename='events.json')
+    userid = find_me()
     search_user(userid)
-
     teams_I_belong = list_teams(userid)
 
     for team in teams_I_belong:
         print(f"Team Name: {team['name']}\nTeam Id: {team['id']}")
         print("\n")
 
-    list_members(8780519)
+    list_of_members = list_members(8780519)
 
+    print_members(list_of_members)
 
-    '''
     data = {
         "template": {
             "data": [
-                {"name": "first_name", "value": "Jane"},
-                {"name": "last_name", "value": "Doe"},
+                {"name": "first_name", "value": "Janette"},
+                {"name": "last_name", "value": "Does"},
                 {"name": "team_id", "value": 8780519}
             ]
         }
-    }'''
+    }
 
     #create_team_member(data)
     #get_url("https://api.teamsnap.com/v3/events")
-
+    '''
 
 if __name__ == "__main__":
 

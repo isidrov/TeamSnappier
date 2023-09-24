@@ -8,7 +8,7 @@ config.read('config.ini')
 
 # Accessing authorization token
 
-oauth_token= config['api']['oauth_token']
+oauth_token= config['api']['oauth_code']
 client_id = config['api']['client_id']
 client_secret = config['api']['client_secret']
 
