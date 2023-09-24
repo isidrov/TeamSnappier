@@ -16,8 +16,6 @@ Before using this API class, ensure you have the following:
 
 ``` ini
 [api]
-access_token = 
-
 client_id = YOUR_CLIENT_ID
 client_Secret = YOUR_CLIENT_SECRET
 oauth_code =  AUTHORIZATION_TOKEN_OBTAINED_IN_STEP_1
@@ -58,12 +56,4 @@ if user_id:
 - **Team Members**: Fetch a list of members in a team using `list_members(team_id)`.
 - **Print Members**: Display information of members using `print_members(memberList)`.
 - **Save as JSON**: Store any data into a JSON file using `write_to_json_file(data, filename="output.json")`.
-
-## Usage
-
-1. **Setup**: Clone this repository.
-2. **Configuration**: In the root directory, create a `config.ini` file and insert your TeamSnap API access token:
-   ```ini
-   [api]
-   access_token = YOUR_ACCESS_TOKEN_HERE
 
