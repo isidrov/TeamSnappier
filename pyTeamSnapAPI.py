@@ -195,11 +195,12 @@ class TeamSnapAPI:
             for item in list:
                 for variable in variables:
                     print(f"{variable}: {item[variable]}")
-                print("======================================")
+                print("---------------------------------------------")
         else:
             for dict in list:
                 for k,v in dict.items():
                     print(f"{k}: {v}")
+                print("---------------------------------------------")
                     
                 
             

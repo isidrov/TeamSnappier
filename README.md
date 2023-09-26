@@ -32,15 +32,30 @@ from TeamSnapAPI import TeamSnapAPI
 # Create an instance of the TeamSnapAPI class
 api = TeamSnapAPI()
 
-# Use the find_me method to get the user's ID
-user_id = api.find_me()
+# Find my own user's ID
+userid = api.find_me()
+print(f"My user ID is: {userid}")
 
-# If user_id was successfully retrieved, list the teams associated with this user
-if user_id:
-    teams = api.list_teams(user_id)
-    for team in teams:
-        print(f"Team Name: {team['name']}")
-        print(f"Team ID: {team['id']}\n")
+# Return Teams I belong
+teams_I_belong = api.list_teams(userid)
+
+# Print Teams with all its variables
+api.print_list(teams_I_belong)
+
+# Print list of Teams with specific variables only
+variables = ['name','id','division_name','division_id']
+api.print_list(teams_I_belong,variables)
+
+# Obtain Events scheduled in a team
+events_list = api.list_events(teamid=1234567)
+
+# Print Events with all its variables
+api.print_list(events_list)
+
+# Print Events with specific variables
+variables = ['name', 'location_name', 'id', 'type','is_game']
+api.print_list(events_list,variables)
+
 ```
 
 
