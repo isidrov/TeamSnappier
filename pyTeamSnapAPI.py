@@ -1,6 +1,7 @@
 import requests
 import json
 import configparser
+import csv
 
 class TeamSnapAPI:
 
@@ -56,7 +57,7 @@ class TeamSnapAPI:
 
         API_HREF = f"https://api.teamsnap.com/v3/teams/search"
 
-        response = requests.get(API_HREF, headers=headers, params=params)
+        response = requests.get(API_HREF, headers=self.headers, params=params)
 
         if response.status_code == 200:
 
@@ -79,7 +80,39 @@ class TeamSnapAPI:
         else:
             print(f"Request failed with status code: {response.status_code}")
             print(response.text)
+    
+    def list_events(self,userid=None,teamid = None):
 
+        params = {
+            'user_id': userid,
+            'team_id': teamid
+        }
+
+        API_HREF = f"https://api.teamsnap.com/v3/events/search"  # Replace with your endpoint URL
+
+        response = requests.get(API_HREF, headers=self.headers, params=params)
+
+        if response.status_code == 200:
+
+            print("list_events() was successful!")
+            parsed_json = response.json()
+
+            list_of_events = []
+
+            for item in parsed_json["collection"]["items"]:
+                data = item["data"]
+                event = {}
+                for subitem in data:
+                    event[subitem["name"]] = subitem["value"]
+
+                list_of_events.append(event)
+
+            return list_of_events
+
+        else:
+            print(f"Request failed with status code: {response.status_code}")
+            print(response.text)
+    
     def search_user(self,userid):
 
         params = {
@@ -121,36 +154,7 @@ class TeamSnapAPI:
 
     # https://api.teamsnap.com/v3/events/search?user_id=28819952'
 
-    def list_events(self,userid):
 
-        params = {
-            'user_id': userid
-        }
-
-        API_HREF = f"https://api.teamsnap.com/v3/events/search"  # Replace with your endpoint URL
-
-        response = requests.get(API_HREF, headers=headers, params=params)
-
-        if response.status_code == 200:
-
-            print("list_events() was successful!")
-            parsed_json = response.json()
-
-            myList = []
-
-            for item in parsed_json["collection"]["items"]:
-                data = item["data"]
-                team = {}
-                for subitem in data:
-                    team[subitem["name"]] = subitem["value"]
-
-                myList.append(team)
-
-            return myList
-
-        else:
-            print(f"Request failed with status code: {response.status_code}")
-            print(response.text)
 
     def list_members(self,team_id):
 
@@ -183,6 +187,57 @@ class TeamSnapAPI:
         else:
             print(f"Request failed with status code: {response.status_code}")
             print(response.text)
+
+    @staticmethod
+    def print_list(list,variables=[]):
+        
+        if variables:
+            for item in list:
+                for variable in variables:
+                    print(f"{variable}: {item[variable]}")
+                print("======================================")
+        else:
+            for dict in list:
+                for k,v in dict.items():
+                    print(f"{k}: {v}")
+                    
+                
+            
+    @staticmethod
+    def csv_to_data_dict(filename):
+        """
+        Convert a CSV file into a data dictionary, skipping the first row.
+
+        Args:
+        - filename (str): Path to the CSV file.
+
+        Returns:
+        - dict: The converted data dictionary.
+        """
+
+        with open(filename, 'r') as file:
+            reader = csv.reader(file)
+
+            # Skip the very first row
+            next(reader)
+
+            # Read the second row (headers) and assign to "name" keys
+            headers = next(reader)
+
+            # Store resulting data
+            data_list = []
+
+            # Read the rest of the rows (values)
+            for row in reader:
+                for header, value in zip(headers, row):
+                    if value:  # Skip cells with no value
+                        data_list.append({"name": header, "value": value})
+
+        return {
+            "template": {
+                "data": data_list
+            }
+        }
 
     @staticmethod
     def print_members(memberList):
