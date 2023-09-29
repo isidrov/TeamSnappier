@@ -46,9 +46,6 @@ def main():
         print("\n")
     '''
 
-    
-
-
     #events_list = api.list_events(userid=userid)
 
     '''
