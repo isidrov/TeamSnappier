@@ -46,7 +46,7 @@ api.print_list(teams_I_belong)
 variables = ['name','id','division_name','division_id']
 api.print_list(teams_I_belong,variables)
 
-# Obtain Events scheduled in a team
+# Obtain Events scheduled in a team. you could also query based on userid
 events_list = api.list_events(teamid=1234567)
 
 # Print Events with all its variables

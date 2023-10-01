@@ -1,39 +1,73 @@
-from pyTeamSnapAPI import TeamSnapAPI
+from TeamSnappier import TeamSnapAPI
 
 def main():
 
     # Create an instance of the TeamSnapAPI class
     api = TeamSnapAPI()
 
-    # Find my own user's ID
-    userid = api.find_me()
-    print(f"My user ID is: {userid}")
+    # Return a list with a dict with all about myself
+    myself = api.find_me()
 
-    # Return Teams I belong
-    teams_I_belong = api.list_teams(userid)
-
-    '''
-    # Print Teams with all its variables
-    print(f"Printing Teams I belong:")
-    print(f"************************")
-    api.print_list(teams_I_belong)
-    '''
+    # Print relevant information about myself
+    variables = ['email', 'id', 'first_name', 'last_name','managed_division_ids']
+    api.print_list(myself, variables)
     
-    # Print Teams with specific variables only
+    # Obtain user_id and division_id
+    user_id = myself[0]['id']
+    managed_division_id = myself[0]['managed_division_ids'][0]
+
+    # Print division details
+    division = api.list_divisions(divisionid=managed_division_id)
+    variables = ['name', 'id', 'league_url']
+    api.print_list(division, variables)
+
+    #List division locations
+    division_locations = api.list_division_locations(divisionid=managed_division_id)
+    variables = ['id', 'name']
+    api.print_list(division_locations, variables)
+
+    # Export locations
+    api.json_to_csv(division_locations,'division_locations_exported.csv')
+
+    # Print Teams I belongwith specific variables only
+    teams_I_belong = api.list_teams(userid=user_id)
     variables = ['name','id','division_name','division_id']
-    print(f"Printing Teams I belong:")
-    print(f"************************")
     api.print_list(teams_I_belong,variables)
+
+    # Find my team_id
+    my_team_id = ''
+    for team in teams_I_belong:
+        if team['name'] == 'Edel. Volunteer (test) Team':
+            my_team_id = team['id']
+    
+    # Export opponents of my team
+    opponents = api.list_opponents(teamid=my_team_id)
+    api.json_to_csv(opponents, 'opponents_exported.csv')
+
+    # Bulk opponents
+    api.create_opponents('bulk_opponents.csv')
+
+
+    Print('test')
+
+    # Create an event
+    #api.create_event('schedule_game_template_2.csv')
+
+    # {'href': 'https://api.teamsnap.com/v3/division_locations', 'rel': 'division_locations'}
+    # {'href': 'https://api.teamsnap.com/v3/locations', 'rel': 'locations'}
+    # {'href': 'https://api.teamsnap.com/v3/opponents', 'rel': 'opponents'}
 
     # Obtain Events scheduled in a team
     events_list = api.list_events(teamid=8780519)
 
-    '''
+    api.json_to_csv(events_list,'my_events_file.csv')
+
+
     # Print Events with all its variables
-    print(f"Printing Events:")
-    print(f"************************")
+
     api.print_list(events_list)
-    '''
+
+
     # Print Events with specific variables
     variables = ['name', 'location_name', 'id', 'type','is_game']
     api.print_list(events_list,variables)
