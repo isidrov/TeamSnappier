@@ -32,31 +32,56 @@ from TeamSnapAPI import TeamSnapAPI
 # Create an instance of the TeamSnapAPI class
 api = TeamSnapAPI()
 
-# Find my own user's ID
-userid = api.find_me()
-print(f"My user ID is: {userid}")
+# Return a list with a dict with all about myself
+myself = api.find_me()
+
+# Print relevant information about myself
+variables = ['email', 'id', 'first_name', 'last_name','managed_division_ids']
+api.print_list(myself, variables)
+
+# Obtain user_id and division_id
+user_id = myself[0]['id']
+managed_division_id = myself[0]['managed_division_ids'][0]
 
 # Return Teams I belong
 teams_I_belong = api.list_teams(userid)
 
-# Print Teams with all its variables
-api.print_list(teams_I_belong)
-
-# Print list of Teams with specific variables only
+# Print list of Teams with information I am interested in
 variables = ['name','id','division_name','division_id']
 api.print_list(teams_I_belong,variables)
 
+# Print division details
+division = api.list_divisions(divisionid=managed_division_id)
+variables = ['name', 'id', 'league_url']
+api.print_list(division, variables)
+
+# List division locations
+division_locations = api.list_division_locations(divisionid=managed_division_id)
+variables = ['id', 'name']
+api.print_list(division_locations, variables)
+
+# Export locations
+api.json_to_csv(division_locations,'division_locations_exported.csv')
+
+# Find my team_id
+my_team_id = ''
+for team in teams_I_belong:
+    if team['name'] == 'Edel. Volunteer (test) Team':
+        my_team_id = team['id']
+
 # Obtain Events scheduled in a team. you could also query based on userid
-events_list = api.list_events(teamid=1234567)
+events_list = api.list_events(teamid=my_team_id)
 
-# Print Events with all its variables
-api.print_list(events_list)
-
-# Print Events with specific variables
-variables = ['name', 'location_name', 'id', 'type','is_game']
-api.print_list(events_list,variables)
+# Export opponents of my team
+opponents = api.list_opponents(teamid=my_team_id)
+api.json_to_csv(opponents, 'opponents_exported.csv')
 
 ```
+# Bulking data
+
+- Under folder Templates, there are CSV files that are used to import data.
+- Copy any template to the root folder to use it for data bulk.
+- A configuration file named **config.ini** in the same directory with the following format:
 
 
 ## Features

@@ -29,7 +29,7 @@ def main():
     # Export locations
     api.json_to_csv(division_locations,'division_locations_exported.csv')
 
-    # Print Teams I belongwith specific variables only
+    # Print Teams I belong with specific variables only
     teams_I_belong = api.list_teams(userid=user_id)
     variables = ['name','id','division_name','division_id']
     api.print_list(teams_I_belong,variables)
