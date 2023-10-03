@@ -281,13 +281,12 @@ class TeamSnappier:
             print(f"Request failed with status code: {response.status_code}")
             print(response.text)
 
-    def create_event(self,events_csv):
+    def create_events(self,events_csv):
 
         data = self.csv_to_json_format(events_csv)
-            
-            
+
         API_HREF = f"https://api.teamsnap.com/v3/events"  # Replace with your endpoint URL
-        response = requests.post(API_HREF, headers=self.headers, json = data)
+        response = requests.post(API_HREF, headers=self.headers, json=data)
 
         if response.status_code in (200, 201, 204):
 

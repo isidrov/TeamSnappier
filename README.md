@@ -1,10 +1,10 @@
-# pyTeamSnapAPI
+# TeamSnappier
 
 A simple Python API client for TeamSnap.
 
 ## Description
 
-The `pyTeamSnapAPI` class provides an easy-to-use Python interface to communicate with TeamSnap's API. This allows developers to interact with TeamSnap's endpoints, such as retrieving the current user's information, listing teams, searching for users, and more.
+The `TeamSnappier` class provides an easy-to-use Python interface to communicate with TeamSnap's API. This allows developers to interact with TeamSnap's endpoints, such as retrieving the current user's information, listing teams, searching for users, and more.
 
 ## Prerequisites
 
