@@ -24,6 +24,17 @@ access_token = ACCESS_TOKEN_OBTAINED_IN_STEP_2
 - You can obtain your client_id and client_secret at [Team Snap App registration](https://auth.teamsnap.com)
 - Make sure one of the Callback URL is urn:ietf:wg:oauth:2.0:oob
 
+## Obtain Authorization Tokens
+
+- Make sure you have set your client_id and client_secret on your config.ini file
+- Run step1_get_code.py and copy the URL printed.
+- Make sure on your default browser you are already logged in with your TeamSnap administrator.
+- Paste the URL from Step1 in the browser, it will show an Authorization Token
+- Copy the Authorization Token from the previous step in the config.ini, auth_code variable
+- Run step2_get_token.py, it will print out your Access Token.
+- Copy your Access Token in your config.ini file, access_token variable.
+
+
 ## Example Usage
 
 ``` python 
@@ -81,7 +92,6 @@ api.json_to_csv(opponents, 'opponents_exported.csv')
 
 - Under folder Templates, there are CSV files that are used to import data.
 - Copy any template to the root folder to use it for data bulk.
-- A configuration file named **config.ini** in the same directory with the following format:
 
 
 ## Features
