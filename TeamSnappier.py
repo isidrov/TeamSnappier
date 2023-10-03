@@ -3,7 +3,7 @@ import json
 import configparser
 import csv
 
-class TeamSnapAPI:
+class TeamSnappier:
 
     def __init__(self):
         config = configparser.ConfigParser()

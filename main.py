@@ -1,9 +1,9 @@
-from TeamSnappier import TeamSnapAPI
+from TeamSnappier import TeamSnappier
 
 def main():
 
     # Create an instance of the TeamSnapAPI class
-    api = TeamSnapAPI()
+    api = TeamSnappier()
 
     # Return a list with a dict with all about myself
     myself = api.find_me()

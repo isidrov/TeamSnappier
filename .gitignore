@@ -3,3 +3,4 @@ output_team_search.json
 schedule_game_template.csv
 config.ini
 main_old.py
+main.py
