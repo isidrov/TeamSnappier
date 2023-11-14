@@ -66,6 +66,33 @@ class TeamSnappier:
             print(f"Request failed with status code: {response.status_code}")
             print(response.text)
 
+    def list_assignments(self, teamid):
+
+        params = {
+            'team_id': teamid
+        }
+
+        API_HREF = f"https://api.teamsnap.com/v3/assignments/search"
+
+        response = requests.get(API_HREF, headers=self.headers, params=params)
+
+        if response.status_code == 200:
+
+            print("list_teams() was successful!\n")
+            parsed_json = response.json()
+
+            list_of_objects = []
+
+            for object_item in parsed_json["collection"]["items"]:
+                object_data = object_item["data"]
+                object = {}
+                for item in object_data:
+                    object[item["name"]] = item["value"]
+
+                list_of_objects.append(object)
+
+            return list_of_objects
+
     def list_opponents(self, teamid):
 
         params = {
@@ -73,6 +100,70 @@ class TeamSnappier:
         }
 
         API_HREF = f"https://api.teamsnap.com/v3/opponents/search"
+
+        response = requests.get(API_HREF, headers=self.headers, params=params)
+
+        if response.status_code == 200:
+
+            print("list_teams() was successful!\n")
+            parsed_json = response.json()
+
+            list_of_objects = []
+
+            for object_item in parsed_json["collection"]["items"]:
+                object_data = object_item["data"]
+                object = {}
+                for item in object_data:
+                    object[item["name"]] = item["value"]
+
+                list_of_objects.append(object)
+
+            return list_of_objects
+
+
+        else:
+            print(f"Request failed with status code: {response.status_code}")
+            print(response.text)
+
+    def list_members(self, teamid):
+
+        params = {
+            'team_id': teamid
+        }
+
+        API_HREF = f"https://api.teamsnap.com/v3/members/search"
+
+        response = requests.get(API_HREF, headers=self.headers, params=params)
+
+        if response.status_code == 200:
+
+            print("list_teams() was successful!\n")
+            parsed_json = response.json()
+
+            list_of_objects = []
+
+            for object_item in parsed_json["collection"]["items"]:
+                object_data = object_item["data"]
+                object = {}
+                for item in object_data:
+                    object[item["name"]] = item["value"]
+
+                list_of_objects.append(object)
+
+            return list_of_objects
+
+
+        else:
+            print(f"Request failed with status code: {response.status_code}")
+            print(response.text)
+
+    def list_statistics(self, teamid):
+
+        params = {
+            'team_id': teamid
+        }
+
+        API_HREF = f"https://api.teamsnap.com/v3/statistic_aggregates/search"
 
         response = requests.get(API_HREF, headers=self.headers, params=params)
 
@@ -138,7 +229,7 @@ class TeamSnappier:
 
         API_HREF = f"https://api.teamsnap.com/v3/members/search"  # Replace with your endpoint URL
 
-        response = requests.get(API_HREF, headers=headers, params=params)
+        response = requests.get(API_HREF, headers=self.headers, params=params)
 
         if response.status_code == 200:
 
@@ -280,50 +371,114 @@ class TeamSnappier:
         else:
             print(f"Request failed with status code: {response.status_code}")
             print(response.text)
-
+            
+#TODO Fix creating multiple events Iiteration 
     def create_events(self,events_csv):
 
-        data = self.csv_to_json_format(events_csv)
+        list_of_events = self.csv_to_templates(events_csv)
 
-        API_HREF = f"https://api.teamsnap.com/v3/events"  # Replace with your endpoint URL
-        response = requests.post(API_HREF, headers=self.headers, json=data)
+        for event in list_of_events:
+            API_HREF = f"https://api.teamsnap.com/v3/events"  # Replace with your endpoint URL
+            response = requests.post(API_HREF, headers=self.headers, json=event)
 
-        if response.status_code in (200, 201, 204):
+            if response.status_code in (200, 201, 204):
 
-            print(f"{response.status_code} request successful!")
+                print(f"{response.status_code} request successful!")
 
-        else:
-            print(f"Request failed with status code: {response.status_code}")
-            print(response.text)
+            else:
+                print(f"Request failed with status code: {response.status_code}")
+                print(response.text)
 
     def create_opponents(self, events_csv):
 
-        data = self.csv_to_json_format(events_csv)
+        list_of_opponents = self.csv_to_templates(events_csv)
 
-        API_HREF = f"https://api.teamsnap.com/v3/opponents"  # Replace with your endpoint URL
-        response = requests.post(API_HREF, headers=self.headers, json=data)
+        for opponent in list_of_opponents:
+            API_HREF = f"https://api.teamsnap.com/v3/opponents"  # Replace with your endpoint URL
+            response = requests.post(API_HREF, headers=self.headers, json=opponent)
 
-        if response.status_code in (200, 201, 204):
+            if response.status_code in (200, 201, 204):
 
-            print(f"{response.status_code} request successful!")
+                print(f"{response.status_code} request successful!")
 
-        else:
-            print(f"Request failed with status code: {response.status_code}")
-            print(response.text)
+            else:
+                print(f"Request failed with status code: {response.status_code}")
+                print(response.text)
 
-    def create_team_member(self,member):
+    def create_team_member(self,csv_file):
 
-        API_HREF = f"https://api.teamsnap.com/v3/members"  # Replace with your endpoint URL
+        list_of_members = self.csv_to_templates(csv_file)
 
-        response = requests.post(API_HREF, headers=self.headers, json=member)
+        for member in list_of_members:
+            API_HREF = f"https://api.teamsnap.com/v3/members"  # Replace with your endpoint URL
+            response = requests.post(API_HREF, headers=self.headers, json=member)
 
-        if response.status_code in (200, 201, 204):
+            if response.status_code in (200, 201, 204):
 
-            print(f"{response.status_code} request successful!")
+                print(f"{response.status_code} request successful!")
 
-        else:
-            print(f"Request failed with status code: {response.status_code}")
-            print(response.text)
+            else:
+                print(f"Request failed with status code: {response.status_code}")
+                print(response.text)
+    def create_assignments(self,assignments_csv):
+
+        
+        list_of_assignments = self.csv_to_templates(assignments_csv)
+
+        for assignment in list_of_assignments:
+            API_HREF = f"https://api.teamsnap.com/v3/assignments"  # Replace with your endpoint URL
+            response = requests.post(API_HREF, headers=self.headers, json=assignment)
+
+            if response.status_code in (200, 201, 204):
+
+                print(f"{response.status_code} request successful!")
+
+            else:
+                print(f"Request failed with status code: {response.status_code}")
+                print(response.text)
+    def delete_opponents_by_ids(self, opponent_list):
+
+        for opponent in opponent_list:
+
+            API_HREF = f"https://api.teamsnap.com/v3/opponents/{opponent}"  # Replace with your endpoint URL
+            response = requests.delete(API_HREF, headers=self.headers)
+
+            if response.status_code in (200, 201, 204):
+
+                print(f"{response.status_code} request successful!")
+
+            else:
+                print(f"Request failed with status code: {response.status_code}")
+                print(response.text)
+                
+    def delete_events_by_id(self, event_list):
+
+        for event in event_list:
+
+            API_HREF = f"https://api.teamsnap.com/v3/events/{event}"  # Replace with your endpoint URL
+            response = requests.delete(API_HREF, headers=self.headers)
+
+            if response.status_code in (200, 201, 204):
+
+                print(f"{response.status_code} request successful!")
+
+            else:
+                print(f"Request failed with status code: {response.status_code}")
+                print(response.text)
+    def delete_events_by_dict(self,events_dict):
+        
+        for event in events_dict:
+                
+            API_HREF = f"https://api.teamsnap.com/v3/events/{event['id']}"  # Replace with your endpoint URL
+            response = requests.delete(API_HREF, headers=self.headers)
+
+            if response.status_code in (200, 201, 204):
+    
+                print(f"{response.status_code} request successful!")
+    
+            else:
+                print(f"Request failed with status code: {response.status_code}")
+                print(response.text)
 
     @staticmethod
     def print_list(list,variables=[]):
@@ -360,15 +515,15 @@ class TeamSnappier:
     
     
     @staticmethod
-    def csv_to_json_format(filename):
+    def csv_to_templates(filename):
         """
-        Convert a CSV file into a specific JSON format, skipping rows where the first cell is "Mandatory" or "Optional".
+        Convert a CSV file into a list of template dicts, skipping rows where the first cell is "Mandatory" or "Optional".
 
         Args:
         - filename (str): Path to the CSV file.
 
         Returns:
-        - dict: The converted JSON format.
+        - list of dicts: The converted JSON format.
         """
 
         with open(filename, 'r') as file:
@@ -384,6 +539,7 @@ class TeamSnappier:
                     }
                 }
 
+            number_of_columns = len(headers)
             # Initialize the data list
             data_list = []
 
@@ -393,25 +549,18 @@ class TeamSnappier:
                     continue
 
                 row_data = []
-                for i in range(len(headers)):
-                    # Check if the value can be converted to an integer
-                    try:
-                        value = int(values[i])
-                    except ValueError:
-                        value = values[i]
 
+                for i in range(number_of_columns):
+                    value = values[i]
+                    name = headers[i]
                     row_data.append({
-                        "name": headers[i],
+                        "name": name,
                         "value": value
                     })
 
-                data_list.extend(row_data)
+                data_list.append({"template": {"data": row_data}})  # Append row_data as a dict
 
-        return {
-            "template": {
-                "data": data_list
-            }
-        }
+        return data_list
 
     @staticmethod
     def print_members(memberList):
